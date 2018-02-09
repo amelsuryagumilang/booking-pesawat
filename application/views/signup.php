@@ -12,28 +12,26 @@
 						<div class="book-left-form">
 							<?php echo $this->session->flashdata('messages'); ?>
 							<form id="myform" role="form" method="post" action="<?php echo base_url();?>admin_con/addUser" enctype="multipart/form-data">
+								<p>Username</p>
+								<input type="text" name="username" id="username">
+								<p>Password</p>
+								<input type="password" name="password" id="password">
 								<p>ID Card</p>
 								<input type="text" name="idcard" id="idcard">
 								<p>Nama Panjang</p>
 								<input type="text" name="namapanjang" id="namapanjang">
-								<p>Username</p>
-								<input type="text" name="username" id="username">
-								<p>Alamat</p>
-								<input type="text" name="alamat" id="alamat">
-								<p>No Telepon</p>
-								<input type="text" name="notelp" id="notelp" placeholder="+628xxxxxxxx">
 								<p>Jenis Kelamin</p>
 								<select name="jenkel" id="jenkel" class="form-control" id="sel1">
     								<option>--Pilih Jenis Kelamin--</option>
     								<option value="Laki-Laki">Laki-Laki</option>
     								<option value="Perempuan">Perempuan</option>
   								</select>
-								<p>Email Address</p>
+  								<p>Email Address</p>
 								<input type="text" name="email" id="email">
-								<p>Password</p>
-								<input type="password" name="password" id="password">
-								<p>Confirm Password</p>
-								<input type="password" name="repassword" id="repassword">
+								<p>Alamat</p>
+								<input type="text" name="alamat" id="alamat">
+								<p>No Telepon</p>
+								<input type="text" name="notelp" id="notelp" placeholder="+628xxxxxxxx">
 								<input type="hidden" id="level" name="level" value="user">
 								<button type="submit" class="btn btn-default">Register</button>
 							</form>
@@ -65,13 +63,3 @@
 		</div>
 		<!-- //container -->
 	</div>
-<script type="text/javascript">
-$( "#myform" ).validate({
-  rules: {
-    password: "required",
-    repassword: {
-      equalTo: "#password"
-    }
-  }
-});
-</script>

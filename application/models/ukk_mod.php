@@ -20,27 +20,69 @@ class Ukk_mod extends CI_Model {
 		return $result;
 	}
 
-	public function cek_user($uname, $pass)
-	{
-		$qry = $this->db->query("select * from user where username='$uname' and password='$pass' limit 1");
-		return $qry;
-	}
-
-	public function saveUser($dataUser){
-		$query= $this->db->insert('pemesan',$dataUser);
+	public function saveTipe($dataTipe){
+		$query= $this->db->insert('tipe_trans',$dataTipe);
 		return $query;
 	}
 
-	public function saveUserSatunya($dataUserSatunya){
-		$query= $this->db->insert('user',$dataUserSatunya);
+	public function saveRute($dataRute){
+		$query= $this->db->insert('rute',$dataRute);
+		return $query;
+	}
+
+	public function saveTrans($dataTrans){
+		$query= $this->db->insert('transport',$dataTrans);
+		return $query;
+	}
+
+	public function saveUser($dataUser){
+		$query= $this->db->insert('user',$dataUser);
 		return $query;
 	}
 
 	public function getUserAll(){
-		$query = $this->db->get('pemesan');
+		$query = $this->db->get('user');
 		$result = $query->result();
 
 		return $result;
+	}
+
+	public function getTipeAll(){
+		$query = $this->db->get('tipe_trans');
+		$result = $query->result();
+
+		return $result;
+	}
+
+	public function getTransAll(){
+		$query = $this->db->get('transport');
+		$result = $query->result();
+
+		return $result;
+	}
+
+	public function hapusUser($idUser){
+		$this->db->where($idUser);
+		$query = $this->db->delete('pemesan',$idUser);
+
+		return $query;
+	}
+
+	public function hapusUserSatunya($idUserSatunya){
+		$this->db->where($idUserSatunya);
+		$query = $this->db->delete('user',$idUserSatunya);
+
+		return $query;
+	}
+
+	public function getuserbuatedit($where2,$user){		
+		return $this->db->get_where($user,$where2);
+	}
+
+	public function updateUsers($where,$dataUser,$user){
+		$this->db->where($where);
+		$query = $this->db->update($user,$dataUser);
+		return $query;
 	}
 }
 

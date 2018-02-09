@@ -59,8 +59,6 @@
 													$( "#datepicker,#datepicker1" ).datepicker();
 												});
 											</script>
-											<!---/End-date-piker---->
-											<!-- Set here the key for your domain in order to hide the watermark on the web server -->
 											
 											<div class="online_reservation">
 													<div class="b_room">
@@ -72,7 +70,9 @@
 																		 <div class="book_date">
 																			 <form>
 																				<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-																				<input type="text" placeholder="Type Departure City" class="typeahead1 input-md form-control tt-input" required="">
+																				<select name="dari" id="dari" class="typeahead1 input-md form-control tt-input" required="">
+																					<option>--Pilih Kota--</option>
+																				</select>
 																			 </form>
 																		 </div>					
 																	 </li>
