@@ -6,6 +6,7 @@ class User_con extends CI_Controller {
 	{
 		$data['content'] = 'home';
 		$data['menu'] = 'home';
+		$data['datakota'] = $this->ukk_mod->getKotaAll();
 		$this->load->view('layout', $data);
 	}
 

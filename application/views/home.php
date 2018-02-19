@@ -66,22 +66,30 @@
 															<div class="reservation">
 																<ul>		
 																	<li  class="span1_of_1 desti">
-																		 <h5>Flying from</h5>
+																		 <h5>Dari</h5>
 																		 <div class="book_date">
 																			 <form>
 																				<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
 																				<select name="dari" id="dari" class="typeahead1 input-md form-control tt-input" required="">
 																					<option>--Pilih Kota--</option>
+																					<?php foreach($datakota as $row) {?>
+																					<option value="<?php echo $row->nama_kota; ?>"><?php echo $row->nama_kota; ?> - <?php echo $row->nama_bandara; ?></option>
+																					<?php } ?>
 																				</select>
 																			 </form>
 																		 </div>					
 																	 </li>
 																	 <li  class="span1_of_1 left desti">
-																		 <h5>Flying to</h5>
+																		 <h5>Ke</h5>
 																		 <div class="book_date">
 																		 <form>
 																			<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-																			<input type="text" placeholder="Type Destination City" class="typeahead1 input-md form-control tt-input" required="">
+																			<select name="dari" id="dari" class="typeahead1 input-md form-control tt-input" required="">
+																				<option>--Pilih Kota--</option>
+																				<?php foreach($datakota as $row) {?>
+																					<option value="<?php echo $row->nama_kota; ?>"><?php echo $row->nama_kota; ?> - <?php echo $row->nama_bandara; ?></option>
+																				<?php } ?>
+																			</select>
 																		 </form>
 																		 </div>		
 																	 </li>
@@ -113,12 +121,12 @@
 																		 <!----------start section_room----------->
 																		 <div class="section_room">
 																			  <select id="country" onchange="change_country(this.value)" class="frm-field required">
-																					<option value="null">1</option>
-																					<option value="null">2</option>         
-																					<option value="AX">3</option>
-																					<option value="AX">4</option>
-																					<option value="AX">5</option>
-																					<option value="AX">6</option>
+																					<option value="1">1</option>
+																					<option value="2">2</option>
+																					<option value="3">3</option>
+																					<option value="4">4</option>
+																					<option value="5">5</option>
+																					<option value="6">6</option>
 																			  </select>
 																		 </div>	
 																	</li>
@@ -127,22 +135,12 @@
 																		 <!----------start section_room----------->
 																		 <div class="section_room">
 																			  <select id="country" onchange="change_country(this.value)" class="frm-field required">
-																					<option value="null">1</option>
-																					<option value="null">2</option>         
-																					<option value="AX">3</option>
-																					<option value="AX">4</option>
-																					<option value="AX">5</option>
-																					<option value="AX">6</option>
-																			  </select>
-																		 </div>	
-																	</li>
-																	<li class="span1_of_1 economy">
-																		 <h5>Class</h5>
-																		 <!----------start section_room----------->
-																		 <div class="section_room">
-																			  <select id="country" onchange="change_country(this.value)" class="frm-field required">
-																					<option value="null">Economy</option>
-																					<option value="null">Business</option>     
+																					<option value="1">1</option>
+																					<option value="2">2</option>         
+																					<option value="3">3</option>
+																					<option value="4">4</option>
+																					<option value="5">5</option>
+																					<option value="6">6</option>
 																			  </select>
 																		 </div>	
 																	</li>
@@ -188,21 +186,28 @@
 															<div class="reservation">
 																<ul>		
 																	<li  class="span1_of_1 desti">
-																		 <h5>Flying from</h5>
+																		 <h5>Dari</h5>
 																		 <div class="book_date">
-																			 <form>
+																			 <form action="<?php echo base_url();?>admin_con/searchKeyword">
 																				<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-																				<input type="text" placeholder="Type Departure City" class="typeahead1 input-md form-control tt-input" required="">
-																			 </form>
+																				<select name="dari" id="dari" class="typeahead1 input-md form-control tt-input" required="">
+																					<option>--Pilih Kota--</option>
+																					<?php foreach($datakota as $row) {?>
+																					<option value="<?php echo $row->nama_kota; ?>"><?php echo $row->nama_kota; ?> - <?php echo $row->nama_bandara; ?></option>
+																					<?php } ?>
+																				</select>
 																		 </div>					
 																	 </li>
 																	 <li  class="span1_of_1 left desti">
-																		 <h5>Flying to</h5>
+																		 <h5>Ke</h5>
 																		 <div class="book_date">
-																		 <form>
 																			<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-																			<input type="text" placeholder="Type Destination City" class="typeahead1 input-md form-control tt-input" required="">
-																		 </form>
+																			<select name="ke" id="ke" class="typeahead1 input-md form-control tt-input" required="">
+																				<option>--Pilih Kota--</option>
+																				<?php foreach($datakota as $row) {?>
+																					<option value="<?php echo $row->nama_kota; ?>"><?php echo $row->nama_kota; ?> - <?php echo $row->nama_bandara; ?></option>
+																				<?php } ?>
+																			</select>
 																		 </div>		
 																	 </li>
 																	 <div class="clearfix"></div>
@@ -213,23 +218,21 @@
 																	 <li  class="span1_of_1">
 																		 <h5>Departure</h5>
 																		 <div class="book_date">
-																		 <form>
 																			<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-																			<input type="date" value="Select date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Select date';}">
-																		</form>
+																			<input type="date" name="date" value="Select date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Select date';}">
 																		 </div>		
 																	 </li>
 																	 <li class="span1_of_1 left">
 																		 <h5>Adults (18+)</h5>
 																		 <!----------start section_room----------->
 																		 <div class="section_room">
-																			  <select id="country" onchange="change_country(this.value)" class="frm-field required">
-																					<option value="null">1</option>
-																					<option value="null">2</option>         
-																					<option value="AX">3</option>
-																					<option value="AX">4</option>
-																					<option value="AX">5</option>
-																					<option value="AX">6</option>
+																			  <select name="adult" id="adult" onchange="change_country(this.value)" class="frm-field required">
+																					<option value="1">1</option>
+																					<option value="2">2</option>         
+																					<option value="3">3</option>
+																					<option value="4">4</option>
+																					<option value="5">5</option>
+																					<option value="6">6</option>
 																			  </select>
 																		 </div>	
 																	</li>
@@ -237,34 +240,22 @@
 																		 <h5>Children (0-17)</h5>
 																		 <!----------start section_room----------->
 																		 <div class="section_room">
-																			  <select id="country" onchange="change_country(this.value)" class="frm-field required">
-																					<option value="null">1</option>
-																					<option value="null">2</option>         
-																					<option value="AX">3</option>
-																					<option value="AX">4</option>
-																					<option value="AX">5</option>
-																					<option value="AX">6</option>
+																			  <select name="child" id="child" onchange="change_country(this.value)" class="frm-field required">
+																					<option value="1">1</option>
+																					<option value="2">2</option>         
+																					<option value="3">3</option>
+																					<option value="4">4</option>
+																					<option value="5">5</option>
+																					<option value="6">6</option>
 																			  </select>
 																		 </div>	
 																	</li>
-																	<li class="span1_of_1 economy">
-																		 <h5>Class</h5>
-																		 <!----------start section_room----------->
-																		 <div class="section_room">
-																			  <select id="country" onchange="change_country(this.value)" class="frm-field required">
-																					<option value="null">Economy</option>
-																					<option value="null">Business</option>     
-																			  </select>
-																		 </div>	
-																	</li>
-																	 <div class="clearfix"></div>
 																</ul>
 															</div>
 															<div class="reservation">
 																<ul>	
 																	 <li class="span1_of_3">
 																			<div class="date_btn">
-																				<form>
 																					<input type="submit" value="Search" />
 																				</form>
 																			</div>

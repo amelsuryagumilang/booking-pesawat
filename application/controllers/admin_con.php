@@ -12,6 +12,42 @@ class Admin_con extends CI_Controller {
 		$this->load->view('loginadmin');
 	}
 
+	function searchKeyword()
+    {
+        $data['content'] = 'databuatuser';
+		$data['menu'] = 'home';
+        $keydari = $this->input->get('dari');
+        $keyke = $this->input->get('ke');
+        $keydate = $this->input->get('date');
+        $brngkt=date('Y-m-d', strtotime($keydate));
+        $key = array(
+        		'kota_awal'=>$keydari,
+        		'kota_akhir'=>$keyke,
+        		'tanggalbrngkt'=>$brngkt
+        	);
+        $searchdata = $this->ukk_mod->search($key);
+        $searchdataarray = $searchdata->row_array();
+        $data['rute'] = $searchdata->result();
+        $datatransport = $this->ukk_mod->gets_by_conditions('transport', array('id_trans' => $searchdataarray['id_trans']));
+        $datatransportarray = $datatransport->row_array();
+        $data['transport'] = $datatransport->result();
+        $data['desklanjutan'] = $this->ukk_mod->gets_by_conditions('tipe_trans', array('id_tipetrans' => $datatransportarray['id_tipetrans']))->result();
+        $this->load->view('layout',$data);
+    }
+
+	public function usermaupesen($id = 0)
+	{
+		$data['content'] = 'usermaupesen';
+		$data['menu'] = 'usermaupesen';
+		$data_trans = $this->ukk_mod->getruterute("where rute.id_rute = '$id' AND transport.id_trans = rute.id_trans")->result_array();
+		$tina = array(
+				'tanggalbrngkt' => $data_trans[0]['tanggalbrngkt']
+			);
+		$where = array('id_rute' => $id);
+        
+		$this->load->view('layoutpesen', $data, $tina);
+	}
+
 	public function dashboard()
 	{
 		$this->cek_session();

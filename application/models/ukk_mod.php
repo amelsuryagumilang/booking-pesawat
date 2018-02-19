@@ -6,6 +6,16 @@ class Ukk_mod extends CI_Model {
 		$this->load->database();
 	}
 
+	public function gets_by_conditions($table, $where){
+		$this->db->where($where);
+		return $this->db->get($table);
+	}
+
+	public function search($key){
+		$this->db->like($key);
+		return $this->db->get('rute');
+	}
+
 	public function getDataAdminByEmailPass($where,$table){
 		return $this->db->get_where($table,$where);
 		// $result = $query->result();
@@ -47,6 +57,14 @@ class Ukk_mod extends CI_Model {
 		return $result;
 	}
 
+	public function getKotaAll(){
+		$this->db->order_by('nama_kota', 'ASC');
+		$query = $this->db->get('kota');
+		$result = $query->result();
+
+		return $result;
+	}
+
 	public function getTipeAll(){
 		$query = $this->db->get('tipe_trans');
 		$result = $query->result();
@@ -77,6 +95,15 @@ class Ukk_mod extends CI_Model {
 
 	public function getuserbuatedit($where2,$user){		
 		return $this->db->get_where($user,$where2);
+	}
+
+	public function getrutebuatpesen($where,$rute){		
+		return $this->db->get_where($rute,$where);
+	}
+
+	public function getruterute($where=" "){
+		$tina = $this->db->query('select * from rute, transport ' .$where);
+		return $tina;
 	}
 
 	public function updateUsers($where,$dataUser,$user){
