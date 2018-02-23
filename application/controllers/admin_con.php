@@ -35,17 +35,17 @@ class Admin_con extends CI_Controller {
         $this->load->view('layout',$data);
     }
 
-	public function usermaupesen($id = 0)
+	public function usermaupesen($id)
 	{
 		$data['content'] = 'usermaupesen';
 		$data['menu'] = 'usermaupesen';
-		$data_trans = $this->ukk_mod->getruterute("where rute.id_rute = '$id' AND transport.id_trans = rute.id_trans")->result_array();
-		$tina = array(
-				'tanggalbrngkt' => $data_trans[0]['tanggalbrngkt']
-			);
-		$where = array('id_rute' => $id);
+		$where = array('id_rute' => $id, 'id_trans' => 'transport.id_trans');
+		$data_rute = $this->ukk_mod->getruterute(array('id_rute' => $id))->result_array();
+		$data['isi'] = array(
+						'datarute' => $data_rute[0]
+						);
         
-		$this->load->view('layoutpesen', $data, $tina);
+		$this->load->view('layoutpesen', $data);
 	}
 
 	public function dashboard()

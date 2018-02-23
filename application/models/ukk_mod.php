@@ -101,9 +101,11 @@ class Ukk_mod extends CI_Model {
 		return $this->db->get_where($rute,$where);
 	}
 
-	public function getruterute($where=" "){
-		$tina = $this->db->query('select * from rute, transport ' .$where);
-		return $tina;
+	public function getruterute($where){
+		$this->db->from('rute');
+		$this->db->where($where);
+		$this->db->join('transport', 'transport.id_trans = rute.id_trans');
+		return $this->db->get();
 	}
 
 	public function updateUsers($where,$dataUser,$user){

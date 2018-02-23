@@ -47,8 +47,19 @@
                 <input type="text" name="alamat" id="alamat">
                 <p>No Telepon</p>
                 <input type="text" name="notelp" id="notelp" placeholder="+628xxxxxxxx">
+                <p>Pilih Tempat Duduk</p>
+                <?php foreach($isi as $row) {?>
+                <?php for ($i=1; $i<=$row['jml'] ; $i++) { ?>
+                <div class="col-md-2">
+                  <input type="checkbox" name="posisi" id="posisi">
+                  A-<?php echo $i; ?>
+                </div>
+                <?php } ?>
+                <?php } ?>
                 <input type="hidden" id="level" name="level" value="user">
-                <button type="submit" class="btn btn-default">Register</button>
+                <div class="col-md-12">
+                  <p><button type="submit" class="btn btn-default">Register</button></p>
+                </div>
               </form>
             </div>
           </div>
@@ -65,13 +76,13 @@
               </div>
             </div>
             <ul>
-            <?php foreach($rute as $r) {?>
-              <li><?php echo $r->tanggalbrngkt; ?> - <?php echo $r->jam_brngkt; ?></li>
-              <li><?php echo $r->tanggalsampai; ?> - <?php echo $r->jam_sampai; ?></li>
-              <li><?php echo $r->harga; ?></li>
-              <li><?php } ?></li>
-              <li><?php echo $tanggalbrngkt; ?></li>
-              <li>Get alerts for low fares</li>
+              <?php foreach($isi as $row) {?>
+              <li>Berangkat Dari : <?php echo $row['kota_awal']; ?> (<?php echo $row['bandara_awal']; ?>)</li>
+              <li>Tujuan : <?php echo $row['kota_akhir']; ?> (<?php echo $row['bandara_akhir']; ?>)</li>
+              <li>Waktu Keberangkatan : <?php echo $row['tanggalbrngkt']; ?> <?php echo $row['jam_brngkt']; ?></li>
+              <li>Waktu Sampai : <?php echo $row['tanggalsampai']; ?> <?php echo $row['jam_sampai']; ?></li>
+              <li>Bandara Transit : <?php echo $row['bandara_transit']; ?></li>
+              <?php } ?>
             </ul>
           </div>
           <div class="clearfix"> </div>
