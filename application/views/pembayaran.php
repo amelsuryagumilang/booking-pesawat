@@ -19,7 +19,6 @@
       //@ sourceURL=pen.js
     </script>
   </div>
-<?php echo $this->session->flashdata('messages'); ?>
   <div class="banner-bottom">
     <!-- container -->
     <div class="container">
@@ -27,27 +26,24 @@
         <div class="book-grids">
           <div class="col-md-6 book-left">
             <div class="book-left-info">
-              <h3>Identitas Penumpang</h3>
+              <h3>PEMBAYARAN</h3>
             </div>
-            <form id="myform" role="form" method="post" action="<?php echo base_url();?>admin_con/maubayar" enctype="multipart/form-data">
+            <form id="myform" role="form" method="post" action="<?php echo base_url();?>admin_con/maumilihdudukan" enctype="multipart/form-data">
             <div class="book-left-form">
-                <?php 
-                for ($i=1; $i <= $ppl['jumlah_kursi'] ; $i++) { 
-                ?>
                 <div class="col-md-12">
-                <p>PENUMPANG <?php echo $i;?> </p>
+                <p></p>
                 </div>
                 <div class="col-md-12">
                 <p>ID Card</p>
-                <input type="text" name="idcard" >
+                <input type="text" name="idcard[]" >
                 </div>
                 <div class="col-md-12">
                 <p>Nama Panjang</p>
-                <input type="text" name="namapanjang" >
+                <input type="text" name="namapanjang[]" >
                 </div>
                 <div class="col-md-12">
                 <p>Jenis Kelamin</p>
-                <select name="jenkel" class="form-control" id="sel1">
+                <select name="jenkel[]" class="form-control" id="sel1">
                     <option>--Pilih Jenis Kelamin--</option>
                     <option value="Laki-Laki">Laki-Laki</option>
                     <option value="Perempuan">Perempuan</option>
@@ -55,19 +51,16 @@
                 </div>
                 <div class="col-md-12">
                 <p>Email Address</p>
-                <input class="form-control" type="email" name="email" >
+                <input class="form-control" type="email" name="email[]" >
                 </div>
                 <div class="col-md-12">
                 <p>Alamat</p>
-                <input type="text" name="alamat" >
+                <input type="text" name="alamat[]" >
                 </div>
                 <div class="col-md-12">
                 <p>No Telepon</p>
-                <input type="text" name="notelp" placeholder="+628xxxxxxxx">
+                <input type="text" name="notelp[]" placeholder="+628xxxxxxxx">
                 </div>
-                <?php
-                }
-                ?>
                 <input type="hidden" name="id_rute" value="<?php foreach($isi as $row) {?><?php echo $row['id_rute']; ?><?php } ?>" />
                 <input type="hidden" name="ppl" value="<?php echo $ppl['jumlah_kursi'];?>" />
                 <div class="col-md-12">
@@ -89,26 +82,25 @@
                 <?php 
                   for ($i=1; $i <=$row['jml']; $i++) { ?>
                   <div class="col-md-3">
-                    <input type="checkbox" name="posisi" value="<?php echo $i; ?>" <?php foreach($filter as $f) { if($i == $f->kode_kursi){ echo "checked disabled"; } } ?>>A<?php echo $i; ?>
+                    <input type="checkbox" name="posisi[]" value="A<?php echo $i; ?>">A<?php echo $i; ?>
                   </div>
                 <?php } ?>
                 <?php } ?>
                 <div class="col-md-12">
-                  <p><button type="submit" class="btn btn-default">Register</button></p>
+                  <p><button type="button" class="btn btn-default">Register</button></p>
                 </div>
             </div>
             </form>
-          </div><?php foreach($tkursi as $riw) {?>
+          </div>
           <script type="text/javascript">
             $(document).ready(function () {
-            $("input[name='posisi']").change(function () {
-            var tina = <?php echo $ppl['jumlah_kursi']?>;
-            var maxAllowed = <?php echo $ppl['jumlah_kursi']+$riw['tot_kursi'];?><?php } ?>;
-            var cnt = $("input[name='posisi']:checked").length;
+            $("input[name='posisi[]']").change(function () {
+            var maxAllowed = <?php echo $ppl['jumlah_kursi'];?>;
+            var cnt = $("input[name='posisi[]']:checked").length;
             if (cnt > maxAllowed) 
             {
               $(this).prop("checked", "");
-              alert('Anda hanya dapat memilih ' + tina + ' Kursi');
+              alert('Anda hanya dapat memilih ' + maxAllowed + ' Kursi');
             }
             });
             });

@@ -6,37 +6,40 @@
 			<div class="col-md-12">
 				<div class="sap_tabs">
 					<div id="horizontalTab" style="display: block; color:white; width: 100%; margin: 0px;">
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-								<tr>
-									<th><center>Nama Pesawat</center></th>
-									<th></th>
-									<th><center>Waktu Berangkat</center></th>
-									<th><center>Waktu Pulang</center></th>
-									<th>Deskripsi</th>
-									<th><center>Harga</center></th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<?php foreach($rute as $r) {?>
-									<?php foreach($transport as $t) {?>
-									<?php foreach($desklanjutan as $dl) {?>
-									<td><center><?php echo $t->nama_trans; ?> - <?php echo $t->kode_trans; ?></center></td>
-									<td><center><img src="<?php echo URL_ASSETS;?>admin/logo/<?php echo $t->logo; ?>" width="50px" alt=""></center></td>
-									<td><center><?php echo $r->tanggalbrngkt; ?> - <?php echo $r->jam_brngkt; ?></center></td>
-									<td><center><?php echo $r->tanggalsampai; ?> - <?php echo $r->jam_sampai; ?></center></td>
-									<td><?php echo $t->deskripsi; ?><br><?php echo $dl->deskripsi; ?></td>
-									<td><center><?php echo $r->harga; ?></center></td>
-									<td><center><a href="<?php echo base_url().'admin_con/usermaupesen/'.$r-> id_rute;?>" class="btn btn-primary">PESAN</a></center></td>
-									<?php } ?>
-									<?php } ?>
-									<?php } ?>
-								</tr>
-							</tbody>
-						</table>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th><center>Nama Pesawat</center></th>
+										<th></th>
+										<th><center>Waktu Berangkat</center></th>
+										<th><center>Waktu Pulang</center></th>
+										<th>Deskripsi</th>
+										<th><center>Harga</center></th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<?php foreach($rute as $r) {?>
+										<?php foreach($transport as $t) {?>
+										<?php foreach($desklanjutan as $dl) {?>
+										<td><center><?php echo $t->nama_trans; ?> - <?php echo $t->kode_trans; ?></center></td>
+										<td><center><img src="<?php echo URL_ASSETS;?>admin/logo/<?php echo $t->logo; ?>" width="50px" alt=""></center></td>
+										<td><center><?php echo $r->tanggalbrngkt; ?> - <?php echo $r->jam_brngkt; ?></center></td>
+										<td><center><?php echo $r->tanggalsampai; ?> - <?php echo $r->jam_sampai; ?></center></td>
+										<td><?php echo $t->deskripsi; ?><br><?php echo $dl->deskripsi; ?></td>
+										<td><center><?php echo $r->harga; ?></center></td>
+										<form action="<?php echo base_url().'admin_con/usermaupesen/'.$r-> id_rute;?>" method="post">
+										<input type="hidden" name="ppl" value="<?php echo $this->input->get('ppl') ;?>" />
+											<td><center><button class="btn btn-primary">PESAN</button></center></td>
+										</form>
+										<?php } ?>
+										<?php } ?>
+										<?php } ?>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>	
 				</div>

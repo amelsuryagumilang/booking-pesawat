@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Govihar a Travel Agency Category Flat bootstrap Responsive website Template | Signup :: w3layouts</title>
+<title></title>
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -40,7 +40,7 @@
 		<div class="container">
 			<div class="header-grids">
 				<div class="logo">
-					<h1><a  href="<?php echo base_url(); ?>"><span>Go</span>Flights</a></h1>
+					<h1><a  href="<?php echo base_url(); ?>"><span>NC</span>Ticketing</a></h1>
 				</div>
 				<!--navbar-header-->
 				<div class="header-dropdown">

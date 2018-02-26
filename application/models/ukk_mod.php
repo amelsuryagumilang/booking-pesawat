@@ -16,6 +16,10 @@ class Ukk_mod extends CI_Model {
 		return $this->db->get('rute');
 	}
 
+	public function tot_kursi($where=" "){
+		return $this->db->query("select count(*) as tot_kursi from pemesanan ".$where);
+	}
+
 	public function getDataAdminByEmailPass($where,$table){
 		return $this->db->get_where($table,$where);
 		// $result = $query->result();
@@ -47,6 +51,16 @@ class Ukk_mod extends CI_Model {
 
 	public function saveUser($dataUser){
 		$query= $this->db->insert('user',$dataUser);
+		return $query;
+	}
+
+	public function savepemesan($datapemesan){
+		$query= $this->db->insert('pemesan',$datapemesan);
+		return $query;
+	}
+
+	public function savepemesanan($datapemesanan){
+		$query= $this->db->insert('pemesanan',$datapemesanan);
 		return $query;
 	}
 
@@ -108,11 +122,63 @@ class Ukk_mod extends CI_Model {
 		return $this->db->get();
 	}
 
+	public function getpesawat($where){
+		$this->db->select('transport.jml');
+		$this->db->from('rute');
+		$this->db->where($where);
+		$this->db->join('transport', 'transport.id_trans = rute.id_trans');
+		return $this->db->get();
+	}
+
+	public function getres($where){
+		$this->db->from('pemesanan');
+		$this->db->where($where);
+		return $this->db->get();
+	}
+
 	public function updateUsers($where,$dataUser,$user){
 		$this->db->where($where);
 		$query = $this->db->update($user,$dataUser);
 		return $query;
 	}
+
+	public function getpemesan($id_card, $reservation_code)
+	{
+		$qry = $this->db->query("select id_pemesan from pemesan where id_card ='$id_card' AND kode_pesan = '$reservation_code'");
+		return $qry->row();
+	}
+
+	public function gethargasatuan($where)
+	{
+		$this->db->select("harga");
+		$this->db->from('rute');
+		$this->db->where('id_rute', $where);
+		return $this->db->get();
+	}
+
+	public function seat($id){
+ 		$this->db->select('transport.jml');
+ 		$this->db->from('rute,transport');
+ 		$this->db->where('rute.id_trans = transport.id_trans');
+ 		$this->db->where('rute.id_rute', $id);
+ 		return $this->db->get();
+ 	}
+
+	public function join_clientreserve($where){
+		$this->db->select("rute.*,transport.*");
+  		$this->db->from('rute');
+  		$this->db->join('transport', 'transport.id_trans = rute.id_trans');
+  		$this->db->where('rute.id_rute', $where);
+  		$query = $this->db->get();
+  		return $query->result();
+	}
+
+	public function filterseat($id){
+ 		$this->db->select('kode_kursi');
+ 		$this->db->where('pemesanan.id_rute',$id);
+ 		return $this->db->get('pemesanan');
+ 	}
+	
 }
 
 ?>

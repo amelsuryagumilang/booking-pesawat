@@ -117,26 +117,12 @@
 																		 </div>					
 																	 </li>
 																	 <li class="span1_of_1 left adult">
-																		 <h5>Adults (18+)</h5>
+																		 <h5>Quantity</h5>
 																		 <!----------start section_room----------->
 																		 <div class="section_room">
-																			  <select id="country" onchange="change_country(this.value)" class="frm-field required">
+																			  <select name="ppl" id="ppl" onchange="change_country(this.value)" class="frm-field required">
 																					<option value="1">1</option>
 																					<option value="2">2</option>
-																					<option value="3">3</option>
-																					<option value="4">4</option>
-																					<option value="5">5</option>
-																					<option value="6">6</option>
-																			  </select>
-																		 </div>	
-																	</li>
-																	<li class="span1_of_1 left children">
-																		 <h5>Children (0-17)</h5>
-																		 <!----------start section_room----------->
-																		 <div class="section_room">
-																			  <select id="country" onchange="change_country(this.value)" class="frm-field required">
-																					<option value="1">1</option>
-																					<option value="2">2</option>         
 																					<option value="3">3</option>
 																					<option value="4">4</option>
 																					<option value="5">5</option>
@@ -223,24 +209,10 @@
 																		 </div>		
 																	 </li>
 																	 <li class="span1_of_1 left">
-																		 <h5>Adults (18+)</h5>
+																		 <h5>Quantity</h5>
 																		 <!----------start section_room----------->
 																		 <div class="section_room">
-																			  <select name="adult" id="adult" onchange="change_country(this.value)" class="frm-field required">
-																					<option value="1">1</option>
-																					<option value="2">2</option>         
-																					<option value="3">3</option>
-																					<option value="4">4</option>
-																					<option value="5">5</option>
-																					<option value="6">6</option>
-																			  </select>
-																		 </div>	
-																	</li>
-																	<li class="span1_of_1 left tab-children">
-																		 <h5>Children (0-17)</h5>
-																		 <!----------start section_room----------->
-																		 <div class="section_room">
-																			  <select name="child" id="child" onchange="change_country(this.value)" class="frm-field required">
+																			  <select name="ppl" id="ppl" onchange="change_country(this.value)" class="frm-field required">
 																					<option value="1">1</option>
 																					<option value="2">2</option>         
 																					<option value="3">3</option>

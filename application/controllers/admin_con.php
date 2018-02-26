@@ -19,6 +19,7 @@ class Admin_con extends CI_Controller {
         $keydari = $this->input->get('dari');
         $keyke = $this->input->get('ke');
         $keydate = $this->input->get('date');
+        $ppl = $this->input->get('ppl');
         $brngkt=date('Y-m-d', strtotime($keydate));
         $key = array(
         		'kota_awal'=>$keydari,
@@ -35,16 +36,152 @@ class Admin_con extends CI_Controller {
         $this->load->view('layout',$data);
     }
 
+	public function kursi()
+	{
+		$data['content'] = 'kursi';
+		$data['menu'] = 'usermaupesen';
+		$datasementara = $this->input->post('datasementara');
+		$data['buat'] = array(
+        		'buat' => $datasementara
+        	);
+		// $ppl = $this->input->post('ppl');
+		// $where = array('id_rute' => $id, 'id_trans' => 'transport.id_trans');
+		// $data['tkursi'] = $this->ukk_mod->tot_kursi("where id_rute ='$id'")->result_array();
+		// $data_res = $this->ukk_mod->getres(array('id_rute' => $id))->result_array();
+		// $data_rute = $this->ukk_mod->getruterute(array('id_rute' => $id))->result_array();
+		// $data['res'] = array(
+		// 				'res' => $data_res[0]
+		// 				);
+		// $data['isi'] = array(
+		// 				'datarute' => $data_rute[0]
+		// 				);
+  //       $data['ppl'] = array(
+  //       		'jumlah_kursi' => $ppl
+  //       	);
+		$this->load->view('layoutpesen', $data);
+	}
+
+	public function maumilihdudukan()
+	{
+		$data['content'] = 'kursi';
+		$data['menu'] = 'usermaupesen';
+		$idcard = $this->input->post('idcard');
+		$namapanjang = $this->input->post('namapanjang');
+		$jenkel = $this->input->post('jenkel');
+		$email = $this->input->post('email');
+		$alamat = $this->input->post('alamat');
+		$notelp = $this->input->post('notelp');
+		$ppl = $this->input->post('ppl');
+		$id_rute = $this->input->post('id_rute');
+		$reservation_code = $this->input->post('reservation_code');
+		$data['sementara'] = array(
+				'id_card' => $idcard,
+				'nama' => $namapanjang,
+				'alamat' => $alamat,
+				'notelp' => $notelp,
+				'jenkel' => $jenkel,
+				'email' => $email,
+				'ppl' => $ppl,
+				'id_rute' => $id_rute
+			);
+		$datapesawat = $this->ukk_mod->getruterute($id_rute)->result_array();
+		$data['pesawat'] = array(
+				'pesawat' => $datapesawat //[0]
+			);
+		$this->load->view('layoutpesen', $data);
+	}
+
 	public function usermaupesen($id)
 	{
 		$data['content'] = 'usermaupesen';
 		$data['menu'] = 'usermaupesen';
+		$ppl = $this->input->post('ppl');
 		$where = array('id_rute' => $id, 'id_trans' => 'transport.id_trans');
+		$where2 = $id;
+ 		$query = $this->ukk_mod->join_clientreserve($where2);
+ 		$data['seat'] = $this->ukk_mod->seat($where2)->result();
+ 		$data['filter'] = $this->ukk_mod->filterseat($where2)->result();
+  		$data['reserve'] = null;
+  		if($query){
+   			$data['reserve'] =  $query;
+  		}
+		$data['tkursi'] = $this->ukk_mod->tot_kursi("where id_rute ='$id'")->result_array();
+		$data_res = $this->ukk_mod->getres(array('id_rute' => $id))->result_array();
 		$data_rute = $this->ukk_mod->getruterute(array('id_rute' => $id))->result_array();
+		$data['res'] = array(
+						'res' => $data_res[0]
+						);
 		$data['isi'] = array(
 						'datarute' => $data_rute[0]
 						);
-        
+        $data['ppl'] = array(
+        		'jumlah_kursi' => $ppl
+        	);
+		$this->load->view('layoutpesen', $data);
+	}
+
+	public function maubayar()
+	{
+		$idcard = $this->input->post('idcard');
+		$namapanjang = $this->input->post('namapanjang');
+		$jenkel = $this->input->post('jenkel');
+		$email = $this->input->post('email');
+		$alamat = $this->input->post('alamat');
+		$notelp = $this->input->post('notelp');
+		$id_rute = $this->input->post('id_rute');
+		$ppl = $this->input->post('ppl');
+		$reservation_code = $this->input->post('reservation_code');
+		$posisi = $this->input->post('posisi');
+
+		$datapemesan = array(
+				'id_card' => $idcard,
+				'nama' => $namapanjang,
+				'alamat' => $alamat,
+				'notelp' => $notelp,
+				'jenkel' => $jenkel,
+				'email' => $email,
+				'kode_pesan' => $reservation_code
+			);
+		
+		// $data['duduk'] = array(
+		// 		'id_card' => $idcard,
+		// 		'nama' => $namapanjang,
+		// 		'alamat' => $alamat,
+		// 		'notelp' => $notelp,
+		// 		'jenkel' => $jenkel,
+		// 		'email' => $email,
+		// 		'kodepes'
+		// 	);
+		$submitData = $this->ukk_mod->savepemesan($datapemesan);
+		if ($submitData==1){
+			$getpemesan = $this->ukk_mod->getpemesan($idcard, $reservation_code)->id_pemesan;
+			$hargasatuan = $this->ukk_mod->gethargasatuan($id_rute);
+
+			$datapemesanan = array(
+				'kode_pesan' => $reservation_code,
+				'id_pemesan' => $getpemesan,
+				'kode_kursi' => $posisi,
+				'id_rute' => $id_rute,
+				'harga' => $ppl*$hargasatuan,
+				'status' => '0'
+			);
+			$submitpemesanan = $this->ukk_mod->savepemesanan($datapemesanan);
+			if ($submitData==1){
+				redirect(base_url().'admin_con/pembayaran');
+			}else{
+				$this->session->set_flashdata('messages', '<div class="alert alert-danger>Maaf Anda <strong>gagal</strong> Memesan. Ada yang salah dengan pemilihan tempat duduk</div>');
+				redirect(base_url().'admin_con/usermaupesen/'.$id);
+			}
+		}else{
+			$this->session->set_flashdata('messages', '<div class="alert alert-danger>Maaf Anda <strong>gagal</strong> Memesan. Ada yang salah dengan data anda</div>');
+			redirect(base_url().'admin_con/usermaupesen/'.$id);
+		}
+	}
+
+	public function pembayaran()
+	{
+		$data['content'] = 'pembayaran';
+		$data['menu'] = 'usermaupesen';
 		$this->load->view('layoutpesen', $data);
 	}
 
